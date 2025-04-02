@@ -1,0 +1,46 @@
+# environment.yml
+# To create this environment: conda env create -f environment.yml
+# To update this environment: conda env update -f environment.yml --prune
+# To activate this environment: conda activate mlip
+
+name: mlip
+
+channels:
+  - conda-forge  # Primary channel as requested
+
+dependencies:
+  # --- Python ---
+  - python>=3.8   # Specify a Python version or range, adjust as needed
+
+  # --- Core ML & Data Science ---
+  - numpy
+  - pandas
+  - scikit-learn
+  - matplotlib
+  - seaborn
+
+  # --- Recommendation Engine ---
+  - scikit-surprise
+
+  # --- Jupyter/IPython ---
+  - ipykernel  # For using this env as a Jupyter kernel
+
+  # --- System & Utilities ---
+  - psutil
+
+  # --- Web Framework ---
+  - flask
+
+  # --- Kafka Clients ---
+  - kafka-python
+  - python-confluent-kafka  # Note: conda package name is often prefixed
+
+  # --- Conda/Pip Management ---
+  - pip  # Include pip in case some packages are only on PyPI or for dev installs
+
+  # --- Optional: Add packages available only via pip below ---
+  # - pip:
+  #   - some-pip-only-package==1.0
+
+  # --- Testing Framework ---
+  - pytest

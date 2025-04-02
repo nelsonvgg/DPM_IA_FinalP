@@ -1,4 +1,5 @@
 ipykernel
+pip
 numpy
 pandas
 matplotlib
@@ -9,3 +10,4 @@ psutil
 flask
 kafka-python
 confluent-kafka
+pytest

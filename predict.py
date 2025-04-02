@@ -38,5 +38,3 @@ def recommend_movies(user_id, model, movies, ratings, num_recommendations=10):
     #print(recommendations[['movieId', 'title', 'predicted_rating']])
 
     return recommendations[['movieId', 'title', 'predicted_rating']]
-
-#recommend_movies(10, "SVD", num_recommendations=10)
