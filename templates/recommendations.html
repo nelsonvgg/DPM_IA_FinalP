@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Recommendations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .recommendation {
+            font-family: monospace;
+            white-space: pre;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 5px;
+        }
+        .back-link {
+            margin-top: 20px;
+            display: block;
+        }
+        .response-time {
+            color: #888;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Movie Recommendations for User {{ user_id }}</h1>
+    <div class="response-time">Response time: {{ response_time }} ms</div>
+    
+    {% for movie in recommendations %}
+    <div class="recommendation">movieId: {{ movie.movieId }},    title: {{ movie.title }}{% for i in range(50 - movie.title|length) %}{{ " " }}{% endfor %}rating: {{ "%.2f" | format(movie.predicted_rating) }},</div>
+    {% endfor %}
+    
+    <a href="/" class="back-link">Back to Home</a>
+</body>
+</html>

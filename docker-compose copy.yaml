@@ -1,0 +1,72 @@
+version: '3'
+
+services:
+  zookeeper:
+    image: bitnami/zookeeper:latest
+    container_name: zookeeper
+    ports:
+      - 2181:2181
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    restart: unless-stopped
+    #networks:
+    #  - app-network
+
+  kafka:
+    image: bitnami/kafka:latest
+    container_name: kafka
+    ports:
+      - 9092:9092
+    environment:
+      - KAFKA_BROKER_ID=1
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+      - KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092
+      - ALLOW_PLAINTEXT_LISTENER=yes          
+    depends_on:
+      - zookeeper
+    restart: unless-stopped
+    #networks:
+    #  - app-network
+
+  # Uncomment below services if you need them
+  
+  # prometheus:
+  #   image: prom/prometheus
+  #   container_name: prometheus
+  #   volumes:
+  #     - ./prometheus/:/etc/prometheus/
+  #   command:
+  #     - '--config.file=/etc/prometheus/prometheus.yml'
+  #   expose:
+  #     - 9090
+  #   ports:
+  #     - 9090:9090
+  #   restart: unless-stopped
+  #   networks:
+  #     - app-network
+
+  # node-exporter:
+  #   image: quay.io/prometheus/node-exporter:latest
+  #   container_name: nodeexporter
+  #   ports:
+  #     - 9100:9100
+  #   expose:
+  #     - 9100
+  #   restart: unless-stopped
+  #   networks:
+  #     - app-network
+
+  # grafana:
+  #   image: grafana/grafana-oss:latest
+  #   container_name: grafana
+  #   ports:
+  #     - 3000:3000
+  #   restart: unless-stopped
+  #   networks:
+  #     - app-network
+
+# Define a custom network so all containers can communicate
+#networks:
+#  app-network:
+#    driver: bridge

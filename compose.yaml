@@ -1,0 +1,13 @@
+services:
+  app:
+    build:
+      context: .
+    restart: unless-stopped
+    init: true
+    command: ["python", "app.py"]
+    # env_file: ./.env  # Uncomment if .env file exists
+    networks:
+      - app_network
+networks:
+  app_network:
+    driver: bridge

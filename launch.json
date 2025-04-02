@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "debugpy",
+      "request": "launch",
+      "name": "Launch Program",
+      "program": "${input:selectProgram}",
+      "console": "integratedTerminal"
+    }
+  ],
+  "inputs": [
+    {
+      "type": "pickString",
+      "id": "selectProgram",
+      "description": "Select the Python file to debug",
+      "options": [
+        "${workspaceFolder}/app.py",
+        "${workspaceFolder}/KafkaDemo.py",
+        "${workspaceFolder}/load_data.py"
+      ]
+    }
+  ]
+}
