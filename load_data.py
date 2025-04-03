@@ -20,8 +20,21 @@ def load_and_split_data(filepath_movies,filepath_ratings, rating_scale=(0.5, 5.0
     #filepath_ratings = './data/ratings.csv'
     
     # Load the data using pandas
-    movies = pd.read_csv(filepath_movies)
-    ratings = pd.read_csv(filepath_ratings)
+    try:
+        movies = pd.read_csv(filepath_movies, sep=',') 
+        ratings = pd.read_csv(filepath_ratings, sep=',')
+    except pd.errors.EmptyDataError:
+        raise ValueError("No data found")    
+    
+    # Validate the structure of the movies DataFrame
+    expected_movie_columns = ['movieId', 'title', 'genres']
+    if not all(column in movies.columns for column in expected_movie_columns):
+        raise ValueError(f"Movies file does not have the required columns: {expected_movie_columns}")
+    
+    # Validate the structure of the ratings DataFrame
+    expected_rating_columns = ['userId', 'movieId', 'rating', 'timestamp']
+    if not all(column in ratings.columns for column in expected_rating_columns):
+        raise ValueError(f"Ratings file does not have the required columns: {expected_rating_columns}")
     
     # Remove row with missing values
     movies.dropna(inplace=True)
@@ -51,12 +64,25 @@ def load_data(filepath_movies,filepath_ratings):
         ratings: The ratings dataset
     """
     
-    filepath_movies = './data/movies.csv'
-    filepath_ratings = './data/ratings.csv'
+    #filepath_movies = './data/movies.csv'
+    #filepath_ratings = './data/ratings.csv'
     
-    # Load the data using pandas
-    movies = pd.read_csv(filepath_movies)
-    ratings = pd.read_csv(filepath_ratings)
+     # Load the data using pandas
+    try:
+        movies = pd.read_csv(filepath_movies, sep=',')
+        ratings = pd.read_csv(filepath_ratings, sep=',')
+    except pd.errors.EmptyDataError:
+        raise ValueError("No data found")
+    
+    # Validate the structure of the movies DataFrame
+    expected_movie_columns = ['movieId', 'title', 'genres']
+    if not all(column in movies.columns for column in expected_movie_columns):
+        raise ValueError(f"Movies file does not have the required columns: {expected_movie_columns}")
+    
+    # Validate the structure of the ratings DataFrame
+    expected_rating_columns = ['userId', 'movieId', 'rating', 'timestamp']
+    if not all(column in ratings.columns for column in expected_rating_columns):
+        raise ValueError(f"Ratings file does not have the required columns: {expected_rating_columns}")
     
     # Remove row with missing values
     movies.dropna(inplace=True)

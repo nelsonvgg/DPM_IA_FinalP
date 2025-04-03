@@ -4,7 +4,11 @@ from surprise import Dataset
 from surprise.model_selection import cross_validate
 import pickle
 
-trainset, testset = load_and_split_data('./data/movies.csv', './data/ratings.csv')
+filepath_movies = './data/movies.csv'
+filepath_ratings = './data/ratings.csv'
+# Load the data using the load_and_split_data function
+trainset, testset = load_and_split_data(filepath_movies, filepath_ratings, test_size=0.2, rating_scale=(0.5, 5.0))
+# Validate the structure of the trainset and testset
 print("Trainset and testset loaded successfully.")
 
 
