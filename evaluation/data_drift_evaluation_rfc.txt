@@ -1,3 +1,3 @@
-Cross Validation Score: 0.5800
+Cross Validation Score: 0.5250
 Interpretation: 
 The distributions of ratings between the files are similar (No data drift).
