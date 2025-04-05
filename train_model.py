@@ -4,7 +4,7 @@ import pickle
 from load_data import load_and_split_data
 
 
-def train_svd_model(trainset, model_save_path="D:/GitHub/DPM_IA_Mid-Term/models/SVD_model.pkl"):
+def train_svd_model(trainset, model_save_path="./models/SVD_model.pkl"):
     # Ensure directory exists
     os.makedirs(os.path.dirname(model_save_path), exist_ok=True)
 
@@ -18,7 +18,7 @@ def train_svd_model(trainset, model_save_path="D:/GitHub/DPM_IA_Mid-Term/models/
     return model
 
 
-def train_knn_model(trainset, model_save_path="D:/GitHub/DPM_IA_Mid-Term/models/KNN_model.pkl"):
+def train_knn_model(trainset, model_save_path="./models/KNN_model.pkl"):
     # Ensure directory exists
     os.makedirs(os.path.dirname(model_save_path), exist_ok=True)
 

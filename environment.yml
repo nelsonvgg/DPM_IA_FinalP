@@ -45,3 +45,4 @@ dependencies:
   # --- Testing Framework ---
   - pytest
   - pytest-mock
+  - pytest-cov

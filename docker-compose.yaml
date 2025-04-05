@@ -2,16 +2,18 @@ version: '3'
 
 services:
   zookeeper:
-    image: zookeeper:latest
+    image: bitnami/zookeeper:latest
     container_name: zookeeper
     ports:
       - 2181:2181
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
     restart: unless-stopped
+    networks:
+      - app-network
 
   kafka:
-    image: apache/kafka:3.9.0
+    image: bitnami/kafka:latest
     container_name: kafka
     ports:
       - 9092:9092
@@ -20,10 +22,12 @@ services:
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
       - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
       - KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092
-      - ALLOW_PLAINTEXT_LISTENER=yes
+      - ALLOW_PLAINTEXT_LISTENER=yes          
     depends_on:
       - zookeeper
     restart: unless-stopped
+    networks:
+      - app-network
 
   # Uncomment below services if you need them
   
@@ -63,6 +67,6 @@ services:
   #     - app-network
 
 # Define a custom network so all containers can communicate
-#networks:
-#  app-network:
-#    driver: bridge
+networks:
+  app-network:
+    driver: bridge

@@ -12,3 +12,4 @@ kafka-python
 confluent-kafka
 pytest
 pytest-mock
+pytest-cov

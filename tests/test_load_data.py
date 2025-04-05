@@ -54,7 +54,7 @@ def mock_rating_data():
 # Test the load_and_split_data function directly
 def test_load_and_split_data_basic(mock_movie_data, mock_rating_data):
     """Test that load_and_split_data returns objects of the correct types."""
-    trainset, testset = load_and_split_data(mock_movie_data, mock_rating_data)
+    trainset, testset,_,_ = load_and_split_data(mock_movie_data, mock_rating_data)
     
     # Check that the trainset is a Surprise Trainset
     assert hasattr(trainset, 'build_anti_testset')
@@ -71,7 +71,7 @@ def test_load_and_split_data_basic(mock_movie_data, mock_rating_data):
 def test_load_and_split_data_test_size(mock_movie_data, mock_rating_data):
     """Test that the test_size parameter works correctly."""
     test_size = 0.25
-    trainset, testset = load_and_split_data(mock_movie_data, mock_rating_data, test_size=test_size)
+    trainset, testset,_,_ = load_and_split_data(mock_movie_data, mock_rating_data, test_size=test_size)
     #print(len(testset))
     #print(trainset.n_ratings)
 
@@ -94,7 +94,7 @@ def test_load_and_split_data_custom_rating_scale(mock_movie_data, mock_rating_da
         custom_rating_file = f.name
     
     try:
-        trainset, testset = load_and_split_data(mock_movie_data, custom_rating_file, rating_scale=custom_scale)
+        trainset, _, _, _ = load_and_split_data(mock_movie_data, custom_rating_file, rating_scale=custom_scale)
         
         # Verify the rating scale was applied correctly
         assert trainset.rating_scale == custom_scale
@@ -112,7 +112,7 @@ def test_load_and_split_data_with_missing_values(mock_movie_data):
         rating_with_missing = f.name
     
     try:
-        trainset, testset = load_and_split_data(mock_movie_data, rating_with_missing)
+        trainset, testset, _, _ = load_and_split_data(mock_movie_data, rating_with_missing)
         
         # Only 2 valid ratings in the file
         total_ratings = trainset.n_ratings + len(testset)
@@ -122,8 +122,8 @@ def test_load_and_split_data_with_missing_values(mock_movie_data):
 
 def test_load_and_split_data_reproducibility(mock_movie_data, mock_rating_data):
     """Test that the random_state parameter ensures reproducible splits."""
-    trainset1, testset1 = load_and_split_data(mock_movie_data, mock_rating_data)
-    trainset2, testset2 = load_and_split_data(mock_movie_data, mock_rating_data)
+    _, testset1, _, _ = load_and_split_data(mock_movie_data, mock_rating_data)
+    _, testset2, _,_  = load_and_split_data(mock_movie_data, mock_rating_data)
     
     # Since random_state is fixed at 42 in the function, both splits should be identical
     assert len(testset1) == len(testset2)
