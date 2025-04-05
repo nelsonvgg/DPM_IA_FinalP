@@ -1,0 +1,4 @@
+Metric,Value
+Average Precision@k,0.5989583333333334
+Average Recall@k,0.6041666666666666
+Average NDCG@k,0.9983735101564077

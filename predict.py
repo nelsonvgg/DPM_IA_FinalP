@@ -4,10 +4,8 @@ import pickle
 def load_model(model_path="D:/GitHub/DPM_IA_Mid-Term/models/SVD_model.pkl"):
     """
     Load a trained model from the specified path.
-
     Parameters:
         model_path (str): Path to the saved model file.
-
     Returns:
         model: The loaded model.
     """
@@ -18,12 +16,6 @@ def load_model(model_path="D:/GitHub/DPM_IA_Mid-Term/models/SVD_model.pkl"):
 
 
 def recommend_movies(user_id, model, movies, ratings, num_recommendations=10):
-    #movies, ratings = load_data('./data/movies.csv', './data/ratings.csv')
-    # if model == "SVD":
-    #     model_path = "D:/GitHub/DPM_IA_Mid-Term/models/SVD_model.pkl"
-    # elif model == "KNN":
-    #     model_path = "D:/GitHub/DPM_IA_Mid-Term/models/KNN_model.pkl"
-    # model = load_model(model_path)
     # Check if the user_id exists in the ratings DataFrame
     if user_id not in ratings['userId'].unique():
         raise ValueError(f"User ID {user_id} does not exist in the ratings dataset.")
@@ -38,3 +30,27 @@ def recommend_movies(user_id, model, movies, ratings, num_recommendations=10):
     #print(recommendations[['movieId', 'title', 'predicted_rating']])
 
     return recommendations[['movieId', 'title', 'predicted_rating']]
+
+# MAIN FUNCTION
+def main():
+    # Load the movies and ratings dataset
+    movies, ratings = load_data('./data/movies.csv', './data/ratings.csv')
+    # Reccommendation with SVD model
+    model_path = "./models/SVD_model.pkl"
+    model = load_model(model_path)
+    user_id = 1  # Example user ID
+    recommendations = recommend_movies(user_id, model, movies, ratings, num_recommendations=5)
+    print(f"Top 5 recommendations for user {user_id} using SVD_model:\n")
+    print(f"{recommendations[['movieId', 'title', 'predicted_rating']]}\n")
+    # Reccommendation with KNN model
+    model_path = "./models/KNN_model.pkl"
+    model = load_model(model_path)
+    user_id = 1  # Example user ID
+    recommendations = recommend_movies(user_id, model, movies, ratings, num_recommendations=5)
+    print(f"Top 5 recommendations for user {user_id} using KNN_model:\n")
+    print(f"{recommendations[['movieId', 'title', 'predicted_rating']]}\n")
+
+if __name__ == "__main__":
+    main()
+
+    

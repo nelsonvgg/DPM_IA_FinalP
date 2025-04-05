@@ -1,0 +1,21 @@
+timestamp,userId,movieId,title,rating
+2023-04-28 08:45:56,510,5952,"Lord of the Rings: The Two Towers, The (2002)",3
+2024-11-12 03:24:54,452,4015,"Dude, Where's My Car? (2000)",5
+2023-09-19 03:03:06,289,1917,Armageddon (1998),3
+2023-11-28 01:34:28,261,318,"Shawshank Redemption, The (1994)",4.5
+2023-04-30 06:39:06,96,2289,"Player, The (1992)",5
+2023-11-21 15:25:12,339,72011,Up in the Air (2009),4.5
+2023-05-27 00:10:00,388,78637,Shrek Forever After (a.k.a. Shrek: The Final Chapter) (2010),5
+2024-09-11 02:17:20,511,5349,Spider-Man (2002),3.5
+2023-10-06         ,46,454,"Firm, The (1993)",5
+2024-09-19 07:38:17,-558,593,"Silence of the Lambs, The (1991)",4
+2023-08-08 09:27:53,196,68954,,4
+2024-01-05 00:44:51,49,4022,Cast Away (2000),6.5
+2024-12-04 19:28:14,610,344,Ace Ventura: Pet Detective (1994),3.7
+2024-11-23 08:43:01,246,60937,"Mummy: Tomb of the Dragon Emperor, The (2008)",
+invalid_row,text,more_text,even_more_text,last
+18-07-2024 00:16:51,595,2628,Star Wars: Episode I - The Phantom Menace (1999),4
+2024-10-31 23:46:29,60,2739,"Color Purple, The (1985)",4
+2024-10-26 09:32:34,374,329,Star Trek: Generations (1994),3
+2023-08-23 16:05:18,13,1619,Seven Years in Tibet (1997),3
+

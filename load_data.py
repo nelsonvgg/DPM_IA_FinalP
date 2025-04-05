@@ -15,10 +15,7 @@ def load_and_split_data(filepath_movies,filepath_ratings, rating_scale=(0.5, 5.0
         trainset: The training set in Surprise format.
         testset: The test set in Surprise format.
     """
-    
-    #filepath_movies = './data/movies.csv'
-    #filepath_ratings = './data/ratings.csv'
-    
+        
     # Load the data using pandas
     try:
         movies = pd.read_csv(filepath_movies, sep=',') 
@@ -39,7 +36,8 @@ def load_and_split_data(filepath_movies,filepath_ratings, rating_scale=(0.5, 5.0
     # Remove row with missing values
     movies.dropna(inplace=True)
     ratings.dropna(inplace=True)
-    
+    print("Movies and ratings datasets loaded successfully.")
+
     # Define the Reader with the rating scale
     reader = Reader(rating_scale=rating_scale)
 
@@ -50,7 +48,7 @@ def load_and_split_data(filepath_movies,filepath_ratings, rating_scale=(0.5, 5.0
     trainset, testset = train_test_split(surprise_data, test_size=test_size, random_state=42)
     print("Trainset and testset loaded successfully.")
 
-    return trainset, testset
+    return trainset, testset, movies, ratings
 
 def load_data(filepath_movies,filepath_ratings):
     """
@@ -63,10 +61,7 @@ def load_data(filepath_movies,filepath_ratings):
         movie: The movies dataset
         ratings: The ratings dataset
     """
-    
-    #filepath_movies = './data/movies.csv'
-    #filepath_ratings = './data/ratings.csv'
-    
+        
      # Load the data using pandas
     try:
         movies = pd.read_csv(filepath_movies, sep=',')
@@ -90,3 +85,20 @@ def load_data(filepath_movies,filepath_ratings):
     print("Movies and ratings datasets loaded successfully.")
 
     return movies, ratings
+
+# MAIN FUNCTION
+def main():
+    # Define file paths for movies and ratings datasets
+    filepath_movies = './data/movies.csv'
+    filepath_ratings = './data/ratings.csv'
+    
+    # Split the data into train and test sets
+    trainset, testset, movies, ratings = load_and_split_data(filepath_movies, filepath_ratings)
+    print(movies.head(5))
+    print(ratings.head(5))
+    print(type(trainset))
+    print(type(testset))   
+
+
+if __name__ == "__main__":
+    main()
