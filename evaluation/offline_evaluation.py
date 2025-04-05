@@ -283,24 +283,20 @@ def plot_summary_table(summary_table):
 # MAIN FUNCTION
 def main():
     # Load the movies and ratings datasets
-    movies = "movies.csv"  
-    ratings = "ratings.csv"
-    data_path = "D:/GitHub/DPM_IA_FinalP/data/" 
-    movies_path = os.path.join(data_path, "movies.csv")
-    ratings_path = os.path.join(data_path, "ratings.csv")
-    trainset, testset, movies, ratings = load_and_split_data(movies_path, ratings_path)
+    current_directory = os.getcwd()        
+    filepath_movies = os.path.join(current_directory, 'data/movies.csv')
+    filepath_ratings = os.path.join(current_directory, 'data/ratings.csv')
+    # Define file paths for movies and ratings datasets
+    trainset, testset, movies, ratings = load_and_split_data(filepath_movies, filepath_ratings)
 
     # Load the SVD trained model from disk
     model_name = "SVD_model.pkl"  # The model filename
-    models_path = "D:/GitHub/DPM_IA_FinalP/models/" 
-    model_path = os.path.join(models_path, model_name)
+    model_path = os.path.join(current_directory, 'models', model_name)
     SVD_model = load_model(model_path)
     # Load the KNN trained model from disk
     model_name = "KNN_model.pkl"  # The model filename
-    models_path = "D:/GitHub/DPM_IA_FinalP/models/" 
-    model_path = os.path.join(models_path, model_name)
-    KNN_model = load_model(model_path)
-    
+    model_path = os.path.join(current_directory, 'models', model_name)
+    KNN_model = load_model(model_path)    
 
     # Define models to evaluate
     models = {

@@ -1,7 +1,8 @@
-from load_data import load_data
+import os
 import pickle
+from load_data import load_data
 
-def load_model(model_path="D:/GitHub/DPM_IA_FinalP/models/SVD_model.pkl"):
+def load_model(model_path="./models/SVD_model.pkl"):
     """
     Load a trained model from the specified path.
     Parameters:
@@ -33,8 +34,13 @@ def recommend_movies(user_id, model, movies, ratings, num_recommendations=10):
 
 # MAIN FUNCTION
 def main():
+    # Define file paths for movies and ratings datasets
+    current_directory = os.getcwd()    
+    filepath_movies = os.path.join(current_directory, 'data/movies.csv')
+    filepath_ratings = os.path.join(current_directory, 'data/ratings.csv')
     # Load the movies and ratings dataset
-    movies, ratings = load_data('./data/movies.csv', './data/ratings.csv')
+    current_directory = os.getcwd() 
+    movies, ratings = load_data(filepath_movies, filepath_ratings)
     # Reccommendation with SVD model
     model_path = "./models/SVD_model.pkl"
     model = load_model(model_path)

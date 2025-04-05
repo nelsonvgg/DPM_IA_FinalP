@@ -11,6 +11,8 @@ from collections import defaultdict
 # Add the parent directory to Python path to allow absolute imports
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
+from load_data import load_data
+
 # Get snapshot from the Kafka topic
 def create_random_ratings_df(movies, ratings, num_rows):
     """Create a random ratings DataFrame for the Kafka topic"""
@@ -147,10 +149,13 @@ def ndcg_at_k(predictions, k=10):
 
 # MAIN FUNCTION
 def main():
-    # Load the dataset
-    movies = pd.read_csv('./data/movies.csv')
-    ratings = pd.read_csv('./data/ratings.csv')
-    
+    # Define file paths for movies and ratings datasets
+    current_directory = os.getcwd()    
+    filepath_movies = os.path.join(current_directory, 'data/movies.csv')
+    filepath_ratings = os.path.join(current_directory, 'data/ratings.csv')
+    # Load the dataset    
+    movies, ratings = load_data(filepath_movies, filepath_ratings) 
+
     # Create a snapshot of Kafka DataFrame with 50 rows
     kafka_ratings_df = create_random_ratings_df(movies, ratings, 100)
     

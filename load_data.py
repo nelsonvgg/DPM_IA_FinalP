@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 from surprise import Dataset, Reader
 from surprise.model_selection import train_test_split
@@ -87,10 +88,11 @@ def load_data(filepath_movies,filepath_ratings):
     return movies, ratings
 
 # MAIN FUNCTION
-def main():
+def main():    
     # Define file paths for movies and ratings datasets
-    filepath_movies = './data/movies.csv'
-    filepath_ratings = './data/ratings.csv'
+    current_directory = os.getcwd()    
+    filepath_movies = os.path.join(current_directory, 'data/movies.csv')
+    filepath_ratings = os.path.join(current_directory, 'data/ratings.csv')
     
     # Split the data into train and test sets
     trainset, testset, movies, ratings = load_and_split_data(filepath_movies, filepath_ratings)

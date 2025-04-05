@@ -12,10 +12,7 @@ TIMESTAMP_FORMAT = '%Y-%m-%d %H:%M:%S'
 
 
 def is_valid_rating_increment(value):
-    """Checks if a rating is a multiple of RATING_INCREMENT."""
-    # Check if the value multiplied by the inverse of the increment is close to an integer
-    # Using // for integer division and checking remainder handles potential float inaccuracies better
-    # Example: 3.5 / 0.5 = 7.0. (3.5 * 2) % 1 == 0
+    # Checks if a rating is a multiple of RATING_INCREMENT.    
     try:
         inverse_increment = 1 / RATING_INCREMENT
         # Check if the value times the inverse increment has a zero fractional part
@@ -193,7 +190,8 @@ def validate_ratings_csv(filepath):
 if __name__ == "__main__":
     # EXAMPLE WITH kafka_ratings.csv
     print("\n--- Validating actual file: kafka_ratings.csv ---")
-    actual_file_path = "./evaluation/kafka_ratings.csv" # Assuming it's in the same directory
+    current_directory = os.getcwd()    
+    actual_file_path = os.path.join(current_directory,'evaluation/kafka_ratings.csv') # Assuming it's in the same directory
     if os.path.exists(actual_file_path):
         is_valid, data, errors = validate_ratings_csv(actual_file_path)
         if is_valid:
@@ -209,7 +207,8 @@ if __name__ == "__main__":
 
     # EXAMPLE WITH test file
     print(f"--- Validating file: kafka_ratings_test.csv ---")
-    test_file_path = "./evaluation/kafka_ratings_test.csv"
+    current_directory = os.getcwd()        
+    test_file_path = os.path.join(current_directory,'evaluation/kafka_ratings_test.csv')
     if os.path.exists(test_file_path):
         is_valid, data, errors = validate_ratings_csv(test_file_path)
         if is_valid:

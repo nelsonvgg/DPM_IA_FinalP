@@ -1,4 +1,5 @@
 # Import necessary libraries
+import os
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -124,9 +125,13 @@ def plot_distributions(snapshot1_path, snapshot2_path):
 
 # MAIN FUNCTION 
 def main():
+    # Define file paths for movies and ratings datasets
+    current_directory = os.getcwd()    
+    filepath_movies = os.path.join(current_directory, 'data/movies.csv')
+    filepath_ratings = os.path.join(current_directory, 'data/ratings.csv')
     # Load the dataset
-    movies = pd.read_csv('./data/movies.csv')
-    ratings = pd.read_csv('./data/ratings.csv')
+    movies = pd.read_csv(filepath_movies)
+    ratings = pd.read_csv(filepath_ratings)
     
     # Create a first snapshot of Kafka DataFrame with 100 rows
     kafka_ratings_df1 = create_random_ratings_df(movies, ratings, 100)

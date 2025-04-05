@@ -38,10 +38,10 @@ def train_knn_model(trainset, model_save_path="./models/KNN_model.pkl"):
 
 # MAIN FUNCTION
 def main():    
-    
     # Define file paths for movies and ratings datasets
-    filepath_movies = './data/movies.csv'
-    filepath_ratings = './data/ratings.csv'
+    current_directory = os.getcwd()    
+    filepath_movies = os.path.join(current_directory, 'data/movies.csv')
+    filepath_ratings = os.path.join(current_directory, 'data/ratings.csv')    
     # Load the data using the load_and_split_data function
     trainset, _, _, _ = load_and_split_data(filepath_movies, filepath_ratings, test_size=0.2, rating_scale=(0.5, 5.0))    
     # Train the models using the training set

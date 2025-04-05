@@ -19,20 +19,15 @@ KAFKA_BROKER = "127.0.0.1:9092"  # Change if Kafka is on another host
 producer = Producer({'bootstrap.servers': KAFKA_BROKER}) ## Create a Kafka producer
 
 # Load the movies and ratings dataset
-movies = "movies.csv"  
-ratings = "ratings.csv"
-data_path = "D:/GitHub/DPM_IA_FinalP/data/" 
-movies_path = os.path.join(data_path, "movies.csv")
-ratings_path = os.path.join(data_path, "ratings.csv")
-movies, ratings = load_data(movies_path, ratings_path)
+current_directory = os.getcwd()    
+filepath_movies = os.path.join(current_directory, 'data/movies.csv')
+filepath_ratings = os.path.join(current_directory, 'data/ratings.csv')
+movies, ratings = load_data(filepath_movies, filepath_ratings)
 
 # Load the trained model from disk
 model_name = "SVD_model.pkl"  # The model filename
-models_path = "D:/GitHub/DPM_IA_FinalP/models/" 
-model_path = os.path.join(models_path, model_name)
+model_path = os.path.join(current_directory, 'models', model_name)
 model = load_model(model_path)
-
-
 
 @app.route("/")
 def home():

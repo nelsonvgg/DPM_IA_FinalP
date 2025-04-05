@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-    environment {        
-        PYTHONPATH = "${WORKSPACE}"
-        PROJECT_NAME = "FinalProject"        
-    }
-
     stages {
         stage('Build') {
             steps {
