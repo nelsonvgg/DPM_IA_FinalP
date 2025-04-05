@@ -9,7 +9,7 @@ scikit-surprise
 psutil
 flask
 kafka-python
-confluent-kafka
+python-confluent-kafka
 pytest
 pytest-mock
 pytest-cov
