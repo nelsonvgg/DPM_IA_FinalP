@@ -285,19 +285,19 @@ def main():
     # Load the movies and ratings datasets
     movies = "movies.csv"  
     ratings = "ratings.csv"
-    data_path = "D:/GitHub/DPM_IA_Mid-Term/data/" 
+    data_path = "D:/GitHub/DPM_IA_FinalP/data/" 
     movies_path = os.path.join(data_path, "movies.csv")
     ratings_path = os.path.join(data_path, "ratings.csv")
     trainset, testset, movies, ratings = load_and_split_data(movies_path, ratings_path)
 
     # Load the SVD trained model from disk
     model_name = "SVD_model.pkl"  # The model filename
-    models_path = "D:/GitHub/DPM_IA_Mid-Term/models/" 
+    models_path = "D:/GitHub/DPM_IA_FinalP/models/" 
     model_path = os.path.join(models_path, model_name)
     SVD_model = load_model(model_path)
     # Load the KNN trained model from disk
     model_name = "KNN_model.pkl"  # The model filename
-    models_path = "D:/GitHub/DPM_IA_Mid-Term/models/" 
+    models_path = "D:/GitHub/DPM_IA_FinalP/models/" 
     model_path = os.path.join(models_path, model_name)
     KNN_model = load_model(model_path)
     

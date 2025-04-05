@@ -21,14 +21,14 @@ producer = Producer({'bootstrap.servers': KAFKA_BROKER}) ## Create a Kafka produ
 # Load the movies and ratings dataset
 movies = "movies.csv"  
 ratings = "ratings.csv"
-data_path = "D:/GitHub/DPM_IA_Mid-Term/data/" 
+data_path = "D:/GitHub/DPM_IA_FinalP/data/" 
 movies_path = os.path.join(data_path, "movies.csv")
 ratings_path = os.path.join(data_path, "ratings.csv")
 movies, ratings = load_data(movies_path, ratings_path)
 
 # Load the trained model from disk
 model_name = "SVD_model.pkl"  # The model filename
-models_path = "D:/GitHub/DPM_IA_Mid-Term/models/" 
+models_path = "D:/GitHub/DPM_IA_FinalP/models/" 
 model_path = os.path.join(models_path, model_name)
 model = load_model(model_path)
 

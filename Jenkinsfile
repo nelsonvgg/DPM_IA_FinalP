@@ -94,15 +94,7 @@ pipeline {
     }
 
     post {
-        success {            
-            publishHTML(target: [
-                allowMissing: false,
-                alwaysLinkToLastBuild: false,
-                keepAll: false,
-                reportDir: './models',
-                reportFiles: 'coverage.xml',
-                reportName: 'Code Coverage Report'
-            ])
+        success {                                    
             echo 'Pipeline completed successfully!'
         }
         failure {

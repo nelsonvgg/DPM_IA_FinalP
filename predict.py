@@ -1,7 +1,7 @@
 from load_data import load_data
 import pickle
 
-def load_model(model_path="D:/GitHub/DPM_IA_Mid-Term/models/SVD_model.pkl"):
+def load_model(model_path="D:/GitHub/DPM_IA_FinalP/models/SVD_model.pkl"):
     """
     Load a trained model from the specified path.
     Parameters:
