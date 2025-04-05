@@ -1,24 +1,23 @@
 pipeline {
     agent any
 
-    environment {
-        
+    environment {        
         PYTHONPATH = "${WORKSPACE}"
-        PROJECT_NAME = "FinalProject"
-        TESTING = "1"
-        BUILD_NUMBER = "${env.BUILD_NUMBER}" 
-
+        PROJECT_NAME = "FinalProject"        
     }
 
     stages {
         stage('Build') {
             steps {
                 sh '''
-                # Create a virtual environment and activate it
-                python3 -m venv venv
-                . venv/bin/activate
-                pip install -r requirements.txt
-                deactivate
+                # Activate the virtual environment and install dependencies
+                source /var/jenkins_home/miniconda3/etc/profile.d/conda.sh
+                conda init
+                conda activate
+                python --version
+                conda install --file requirements.txt -c conda-forge --yes
+                conda list
+                conda deactivate
                 '''
             }
         }
@@ -27,10 +26,12 @@ pipeline {
             steps {
                 echo 'Running Unit Tests'
                 sh '''
-                . venv/bin/activate
+                source /var/jenkins_home/miniconda3/etc/profile.d/conda.sh
+                conda init
+                conda activate
                 cd tests
                 python run_tests_with_coverage.py 
-                deactivate
+                conda deactivate
                 '''
             }
         }
@@ -39,10 +40,12 @@ pipeline {
             steps {
                 echo 'Running Offline Evaluation'
                 sh '''
-                . venv/bin/activate
+                source /var/jenkins_home/miniconda3/etc/profile.d/conda.sh
+                conda init
+                conda activate
                 cd evaluation
                 python offline_evaluation.py 
-                deactivate
+                conda deactivate
                 '''
             }
         }
@@ -51,10 +54,12 @@ pipeline {
             steps {
                 echo 'Running Online Evaluation'
                 sh '''
-                . venv/bin/activate
+                source /var/jenkins_home/miniconda3/etc/profile.d/conda.sh
+                conda init
+                conda activate
                 cd evaluation
                 python online_evaluation.py
-                deactivate
+                conda deactivate
                 '''
             }
         }
@@ -63,10 +68,12 @@ pipeline {
             steps {
                 echo 'Running Schema Enforcement'
                 sh '''
-                . venv/bin/activate
+                source /var/jenkins_home/miniconda3/etc/profile.d/conda.sh
+                conda init
+                conda activate
                 cd evaluation
                 python schema_enforcement.py
-                deactivate
+                conda deactivate
                 '''
             }
         }
@@ -75,18 +82,27 @@ pipeline {
             steps {
                 echo 'Running Data Drift'
                 sh '''
-                . venv/bin/activate
+                source /var/jenkins_home/miniconda3/etc/profile.d/conda.sh
+                conda init
+                conda activate
                 cd evaluation
                 python data_drift.py
-                deactivate
+                conda deactivate
                 '''
             }
         }        
     }
 
     post {
-        success {
-            junit 'report.xml'
+        success {            
+            publishHTML(target: [
+                allowMissing: false,
+                alwaysLinkToLastBuild: false,
+                keepAll: false,
+                reportDir: './models',
+                reportFiles: 'coverage.xml',
+                reportName: 'Code Coverage Report'
+            ])
             echo 'Pipeline completed successfully!'
         }
         failure {
