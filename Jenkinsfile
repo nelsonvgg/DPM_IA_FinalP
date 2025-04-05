@@ -9,8 +9,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh '''
-                # Activate the virtual environment and install dependencies
+                echo 'Installing dependencies'
+                sh '''#!/bin/bash                
                 source /var/jenkins_home/miniconda3/etc/profile.d/conda.sh
                 conda init
                 conda activate
@@ -25,7 +25,7 @@ pipeline {
         stage('Run Unit Tests and generate test report') {
             steps {
                 echo 'Running Unit Tests'
-                sh '''
+                sh '''#!/bin/bash
                 source /var/jenkins_home/miniconda3/etc/profile.d/conda.sh
                 conda init
                 conda activate
@@ -39,7 +39,7 @@ pipeline {
         stage('Run Offline Evaluation') {
             steps {
                 echo 'Running Offline Evaluation'
-                sh '''
+                sh '''#!/bin/bash
                 source /var/jenkins_home/miniconda3/etc/profile.d/conda.sh
                 conda init
                 conda activate
@@ -53,7 +53,7 @@ pipeline {
         stage('Run Online Evaluation') {
             steps {
                 echo 'Running Online Evaluation'
-                sh '''
+                sh '''#!/bin/bash
                 source /var/jenkins_home/miniconda3/etc/profile.d/conda.sh
                 conda init
                 conda activate
@@ -67,7 +67,7 @@ pipeline {
         stage('Run Schema Enforcement') {
             steps {
                 echo 'Running Schema Enforcement'
-                sh '''
+                sh '''#!/bin/bash
                 source /var/jenkins_home/miniconda3/etc/profile.d/conda.sh
                 conda init
                 conda activate
@@ -81,7 +81,7 @@ pipeline {
         stage('Run Data Drift') {
             steps {
                 echo 'Running Data Drift'
-                sh '''
+                sh '''#!/bin/bash
                 source /var/jenkins_home/miniconda3/etc/profile.d/conda.sh
                 conda init
                 conda activate
